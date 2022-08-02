@@ -18,6 +18,12 @@ public class Puzzle : MonoBehaviour
 
     [SerializeField] XRSocketInteractor socketInteractor;
 
+    // Optional particle effect to fire off when unlocked
+    public ParticleSystem playParticleOnSolved;
+
+    // Toggle if key should be deleted on solve
+    public bool destroyKeyOnSolve = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +81,13 @@ public class Puzzle : MonoBehaviour
         {
             puzzleUnlocker.UnlockConnectedPuzzle();
         }
+
+        //check if I have an effect to play
+        if (playParticleOnSolved)
+        {
+            Debug.Log("Playing Particle");
+            playParticleOnSolved.Play();
+        }
     }
 
     public void CheckStoredObject(SelectEnterEventArgs selectionInfo)
@@ -87,7 +100,10 @@ public class Puzzle : MonoBehaviour
             //Debug.Log($"Key inserted");
             SetSolved();
 
-            Destroy(collidedObject);
+            if (destroyKeyOnSolve)
+            {
+                Destroy(collidedObject);
+            }            
         }
     }
 }
