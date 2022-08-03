@@ -11,7 +11,7 @@ public class ventBreeze : MonoBehaviour
         {
             other.GetComponent<Rigidbody>().useGravity = false;
 
-            other.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0.5f);
+            other.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0.75f);
 
         }
     }
