@@ -6,8 +6,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Puzzle : MonoBehaviour
 {
+    public string puzzleName;
     private List<GameObject> puzzleObjects;
     public GameObject key;
+
 
     private enum PuzzleState { Locked, Active, Solved };
     [SerializeField] PuzzleState currentState;
@@ -27,26 +29,44 @@ public class Puzzle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Add self to Puzzle Manager
-        Debug.Log($"Adding self {gameObject.name} to Puzzle Manager");
-        PuzzleManager.Instance.puzzles.Add(this);
 
         if (socketInteractor == null)
         {
             socketInteractor = GetComponent<XRSocketInteractor>();
         }
+    }
 
-        currentState = startingState;
+    public void Initialize(bool solved)
+    {
 
-        if (currentState == PuzzleState.Locked)
+        if (solved)
         {
-            LockPuzzle();
+            // Change state variable
+            currentState = PuzzleState.Solved;
+
+            // Turn off socket interactor
+            socketInteractor.socketActive = false;
+
+            // Tell Puzzle Manager I've been solved
+            PuzzleManager.Instance.puzzles.Remove(this);
         }
-        
+        else
+        {
+            if (startingState == PuzzleState.Locked)
+            {
+                LockPuzzle();
+                currentState = PuzzleState.Locked;
+            }
+            else
+            {
+                currentState = startingState;
+            }
+        }        
     }
 
     public void UnlockPuzzle()
     {
+
         this.currentState = PuzzleState.Active;
         socketInteractor.socketActive = true;
     }
@@ -77,7 +97,7 @@ public class Puzzle : MonoBehaviour
         PuzzleManager.Instance.PuzzleCleared(this);
 
         // Check if I unlock any puzzles
-        if(TryGetComponent<UnlocksPuzzle>(out UnlocksPuzzle puzzleUnlocker))
+        if (TryGetComponent<UnlocksPuzzle>(out UnlocksPuzzle puzzleUnlocker))
         {
             puzzleUnlocker.UnlockConnectedPuzzle();
         }
@@ -97,7 +117,6 @@ public class Puzzle : MonoBehaviour
 
         if (collidedObject.Equals(key)) 
         {
-            //Debug.Log($"Key inserted");
             SetSolved();
 
             if (destroyKeyOnSolve)
@@ -105,5 +124,15 @@ public class Puzzle : MonoBehaviour
                 Destroy(collidedObject);
             }            
         }
+    }
+
+    public bool GetClearedState()
+    {
+        return (currentState == PuzzleState.Solved);
+    }
+
+    public bool GetLockedState()
+    {
+        return (currentState == PuzzleState.Locked);
     }
 }

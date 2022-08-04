@@ -10,5 +10,7 @@ public class UnlocksPuzzle : MonoBehaviour
     public void UnlockConnectedPuzzle()
     {
         puzzleToUnlock.UnlockPuzzle();
+
+        GameStateManager.Instance.UpdateCheckpoint(puzzleToUnlock);
     }
 }
