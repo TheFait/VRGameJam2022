@@ -29,9 +29,10 @@ public class Puzzle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         if (socketInteractor == null)
         {
+
+            Debug.Log($"Grabbing Interactor for {name}");
             socketInteractor = GetComponent<XRSocketInteractor>();
         }
     }
@@ -66,7 +67,6 @@ public class Puzzle : MonoBehaviour
 
     public void UnlockPuzzle()
     {
-
         this.currentState = PuzzleState.Active;
         socketInteractor.socketActive = true;
     }
