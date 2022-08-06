@@ -1,34 +1,27 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
+[ExecuteInEditMode]
 public class water : MonoBehaviour
 {
+    ParticleSystem ps;
 
-    void OnPatrticleTrigger()
+    void OnEnable()
     {
-        ParticleSystem ps = GetComponent<ParticleSystem>();
+        ps = GetComponent<ParticleSystem>();
+    }
 
-        Debug.Log("Oi");
+
+    void OnParticleTrigger()
+    {
         var collider = ps.trigger.GetCollider(0);
 
-        Debug.Log(collider);
-
-        //MeshRenderer mr = collider.transform.GetChild(0).GetComponent<MeshRenderer>();
-        //mr.enabled = true;
-        //mr.forceRenderingOff = false;
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        Debug.Log(collider.ToString());
+        MeshRenderer mr = collider.GetComponent<MeshRenderer>();
+        mr.enabled = true;
+        mr.forceRenderingOff = false;
 
     }
+
 }

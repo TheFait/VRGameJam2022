@@ -1563,6 +1563,7 @@ GameObject:
   - component: {fileID: 190565164}
   - component: {fileID: 190565163}
   - component: {fileID: 190565162}
+  - component: {fileID: 190565165}
   m_Layer: 0
   m_Name: Stream Origin
   m_TagString: Match
@@ -5414,7 +5415,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -5422,7 +5423,7 @@ ParticleSystem:
     serializedVersion: 2
     inside: 0
     outside: 0
-    enter: 0
+    enter: 2
     exit: 1
     colliderQueryMode: 0
     radiusScale: 1
@@ -6379,6 +6380,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &190565165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190565160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc49a7be29a1a674cb22c91b1ec7577a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &190578970
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47328,9 +47341,9 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115520425}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: -10, z: -0.00000008940697}
