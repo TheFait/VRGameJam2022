@@ -8,7 +8,7 @@ public class water : MonoBehaviour
     List<int> total_entered = new List<int>();
     int num_colliders = 0;
     ParticleSystem ps;
-
+    bool flag = false;
     void OnEnable()
     {
         ps = GetComponent<ParticleSystem>();
@@ -41,11 +41,21 @@ public class water : MonoBehaviour
                 total_entered[i] += numEnter;
             }
 
-            if (total_entered[i] > 15)
+            if (total_entered[i] > 15 && !flag)
             {
                 MeshRenderer mr = collider.GetComponent<MeshRenderer>();
                 mr.enabled = true;
                 mr.forceRenderingOff = false;
+
+                GameObject obj = GameObject.Find("/Solution Sockets/Solo Cup");
+
+                Animation anim = obj.GetComponent<Animation>();
+                Behaviour bhvr = (Behaviour)anim;
+
+                bhvr.enabled = true;
+
+                anim.Play("Solocup");
+                flag = true;
             }
 
         }

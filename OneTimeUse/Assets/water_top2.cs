@@ -9,10 +9,15 @@ public class water_top2 : MonoBehaviour
     List<int> total_entered = new List<int>();
     int num_colliders = 0;
     ParticleSystem ps;
+    bool triggered = false;
+    GameObject obj;
+    Animation anim;
 
-    void OnEnable()
+    void Start()
     {
+        obj = GameObject.Find("/Solution Sockets/Solo Cup");
 
+        anim = obj.GetComponent<Animation>();
     }
 
 
@@ -39,22 +44,27 @@ public class water_top2 : MonoBehaviour
                 total_entered[i] += numEnter;
             }
 
-            if (total_entered[i] > 15)
+            if (total_entered[i] > 15 && !triggered)
             {
+                Debug.Log("One");
                 MeshRenderer mr = collider.GetComponent<MeshRenderer>();
                 mr.enabled = true;
                 mr.forceRenderingOff = false;
 
-                //TODO
-                var socket= gameObject.transform.Find("/Solution Sockets/Solo Cup");
-                //Disable Cup's socket, which add to the weight of the platform rigidbody from the cup
+                Debug.Log("Post");
+                obj = GameObject.Find("/Solution Sockets/Solo Cup");
 
-                socket.transform.Translate(Vector3.down);
+                anim = obj.GetComponent<Animation>();
+                Behaviour bhvr = (Behaviour)anim;
+           
+                bhvr.enabled = true;
 
             }
 
         }
 
     }
+
+
 
 }
