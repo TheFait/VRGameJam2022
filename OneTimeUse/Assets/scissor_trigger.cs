@@ -15,15 +15,13 @@ public class scissor_trigger : MonoBehaviour
     {
         if (!flag)
         {
-            Debug.Log("Collide!");
+
             GameObject obj = GameObject.Find("/scissor blades/Blade");
 
             Animation anim = obj.GetComponent<Animation>();
             Behaviour bhvr = (Behaviour)anim;
 
             bhvr.enabled = true;
-
-            anim.Play("scissor");
 
             obj = GameObject.Find("/Bowling ball/Sphere");
             Rigidbody rb = obj.GetComponent<Rigidbody>();
