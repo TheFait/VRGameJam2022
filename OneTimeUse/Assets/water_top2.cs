@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.XR.Interaction.Toolkit;
 
 [ExecuteInEditMode]
 public class water_top2 : MonoBehaviour
@@ -9,15 +8,15 @@ public class water_top2 : MonoBehaviour
     List<int> total_entered = new List<int>();
     int num_colliders = 0;
     ParticleSystem ps;
-    bool triggered = false;
-    GameObject obj;
-    Animation anim;
-
-    void Start()
+    bool flag = false;
+    void OnEnable()
     {
-        obj = GameObject.Find("/Solution Sockets/Solo Cup");
-
-        anim = obj.GetComponent<Animation>();
+        ps = GetComponent<ParticleSystem>();
+        num_colliders = ps.trigger.colliderCount;
+        for (int i = 0; i < num_colliders; i++)
+        {
+            total_entered.Add(0);
+        }
     }
 
 
@@ -26,8 +25,6 @@ public class water_top2 : MonoBehaviour
 
         for (int i = 0; i < num_colliders; i++)
         {
-            ps = GetComponent<ParticleSystem>();
-
             List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
 
             //get the collider 
@@ -44,27 +41,25 @@ public class water_top2 : MonoBehaviour
                 total_entered[i] += numEnter;
             }
 
-            if (total_entered[i] > 15 && !triggered)
+            if (total_entered[i] > 15 && !flag)
             {
-                Debug.Log("One");
                 MeshRenderer mr = collider.GetComponent<MeshRenderer>();
                 mr.enabled = true;
                 mr.forceRenderingOff = false;
 
-                Debug.Log("Post");
-                obj = GameObject.Find("/Solution Sockets/Solo Cup");
+                GameObject obj = GameObject.Find("/Solution Sockets/Solo Cup");
 
-                anim = obj.GetComponent<Animation>();
+                Animation anim = obj.GetComponent<Animation>();
                 Behaviour bhvr = (Behaviour)anim;
-           
+
                 bhvr.enabled = true;
 
+                anim.Play("Solocup");
+                flag = true;
             }
 
         }
 
     }
-
-
 
 }
