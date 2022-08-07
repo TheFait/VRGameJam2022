@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Match
   - Rope
+  - Sockets
   layers:
   - Default
   - TransparentFX
