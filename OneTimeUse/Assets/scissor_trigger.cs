@@ -23,6 +23,8 @@ public class scissor_trigger : MonoBehaviour
 
             bhvr.enabled = true;
 
+            anim.Play("scissor");
+
             obj = GameObject.Find("/Bowling ball/Sphere");
             Rigidbody rb = obj.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.None;
