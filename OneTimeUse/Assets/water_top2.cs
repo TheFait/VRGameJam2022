@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.XR.Interaction.Toolkit;
 
 [ExecuteInEditMode]
-public class water : MonoBehaviour
+public class water_top2 : MonoBehaviour
 {
     List<int> total_entered = new List<int>();
     int num_colliders = 0;
@@ -11,12 +12,7 @@ public class water : MonoBehaviour
 
     void OnEnable()
     {
-        ps = GetComponent<ParticleSystem>();
-        num_colliders = ps.trigger.colliderCount;
-        for(int i = 0; i < num_colliders; i++)
-        {
-            total_entered.Add(0);
-        }
+
     }
 
 
@@ -25,6 +21,8 @@ public class water : MonoBehaviour
 
         for (int i = 0; i < num_colliders; i++)
         {
+            ps = GetComponent<ParticleSystem>();
+
             List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
 
             //get the collider 
@@ -46,6 +44,13 @@ public class water : MonoBehaviour
                 MeshRenderer mr = collider.GetComponent<MeshRenderer>();
                 mr.enabled = true;
                 mr.forceRenderingOff = false;
+
+                //TODO
+                var socket= gameObject.transform.Find("/Solution Sockets/Solo Cup");
+                //Disable Cup's socket, which add to the weight of the platform rigidbody from the cup
+
+                socket.transform.Translate(Vector3.down);
+
             }
 
         }
