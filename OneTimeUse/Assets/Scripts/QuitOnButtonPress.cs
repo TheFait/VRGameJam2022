@@ -17,9 +17,14 @@ public class QuitOnButtonPress : MonoBehaviour
 
     void QuitApp(InputAction.CallbackContext ctx)
     {
-        //Debug.Log("Quitting App");
+        /* DO NOT USE, it breaks the XROrigin :(
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBPLAYER
+         Application.OpenURL(webplayerQuitURL);
+#else
+         Application.Quit();
 #endif
+        */
     }
 }
