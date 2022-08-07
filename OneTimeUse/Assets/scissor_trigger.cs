@@ -25,9 +25,10 @@ public class scissor_trigger : MonoBehaviour
 
             anim.Play("scissor");
 
-            obj = GameObject.Find("/Blowing ball/Sphere");
-            Rigidbody gameObjectsRigidBody = obj.AddComponent<Rigidbody>(); // Add the rigidbody.
-            gameObjectsRigidBody.mass = 5;
+            obj = GameObject.Find("/Bowling ball/Sphere");
+            Rigidbody rb = obj.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.None;
+            rb.mass = 5;
             flag = true;
         }
     }
