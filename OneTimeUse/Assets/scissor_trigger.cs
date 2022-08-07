@@ -15,7 +15,7 @@ public class scissor_trigger : MonoBehaviour
     {
         if (!flag)
         {
-            Debug.Log("Collide!");
+
             GameObject obj = GameObject.Find("/scissor blades/Blade");
 
             Animation anim = obj.GetComponent<Animation>();

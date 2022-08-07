@@ -11,6 +11,8 @@ public class MatchStriker : MonoBehaviour
         {
             ParticleSystem ps = other.transform.GetChild(2).GetComponent<ParticleSystem>();
             ps.Play();
+            ps = other.transform.GetChild(3).GetComponent<ParticleSystem>();
+            ps.Play();
         }
     }
     // Start is called before the first frame update
