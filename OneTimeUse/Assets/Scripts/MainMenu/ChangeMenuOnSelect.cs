@@ -10,6 +10,8 @@ public class ChangeMenuOnSelect : MonoBehaviour
 
     private Material baseMat;
 
+    bool selected = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +26,27 @@ public class ChangeMenuOnSelect : MonoBehaviour
 
     public void OnSelected(SelectEnterEventArgs selectEnterEventArgs)
     {
-        // Reset all materials
-        MainMenuManager.Instance.ResetAllMaterials();
+        
 
-        // loop through children and change all materials to the new one
-        Renderer[] children = GetComponentsInChildren<Renderer>();
-        foreach (Renderer rend in children)
+        if (!selected)
         {
-            rend.material = onSelectMaterial;
+            // Reset all materials
+            MainMenuManager.Instance.ResetAllMaterials();
+
+            // loop through children and change all materials to the new one
+            Renderer[] children = GetComponentsInChildren<Renderer>();
+            foreach (Renderer rend in children)
+            {
+                rend.material = onSelectMaterial;
+            }
+
+            selected = true;
         }
+        else
+        {
+            ResetMaterial();
+        }
+        
 
         // Change UI to the Selected Scene
         MainMenuManager.Instance.ChangeUIScene(menuState);
@@ -45,5 +59,35 @@ public class ChangeMenuOnSelect : MonoBehaviour
         {
             rend.material = baseMat;
         }
+
+        selected = false;
+    }
+
+    public void OnActivate(ActivateEventArgs selectEnterEventArgs)
+    {
+
+
+        if (!selected)
+        {
+            // Reset all materials
+            MainMenuManager.Instance.ResetAllMaterials();
+
+            // loop through children and change all materials to the new one
+            Renderer[] children = GetComponentsInChildren<Renderer>();
+            foreach (Renderer rend in children)
+            {
+                rend.material = onSelectMaterial;
+            }
+
+            selected = true;
+        }
+        else
+        {
+            ResetMaterial();
+        }
+
+
+        // Change UI to the Selected Scene
+        MainMenuManager.Instance.ChangeUIScene(menuState);
     }
 }

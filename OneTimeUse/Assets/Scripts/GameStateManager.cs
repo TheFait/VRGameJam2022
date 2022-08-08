@@ -72,6 +72,9 @@ public class GameStateManager : MonoBehaviour
             string json = File.ReadAllText(filePath);
             Debug.Log($"Data read in: {json}");
             gameData = JsonUtility.FromJson<GameData>(json);
+
+            // File found, tell the UI Manager we can continue a save
+            MainMenuManager.Instance.SaveFileFound();
         }
 
 
@@ -174,5 +177,11 @@ public class GameStateManager : MonoBehaviour
         {
             point.cleared = false;
         }
+    }
+
+    public bool directInteractor = false;
+    public void SetInteractor(bool direct)
+    {
+        directInteractor = direct;
     }
 }

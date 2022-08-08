@@ -30,6 +30,16 @@ public class InteractorManager : MonoBehaviour
     private void Start()
     {
         toggleInteractorAction.action.performed += swapInputs;
+
+
+        //Debug.Log($"Loading with interactor: {GameStateManager.Instance.directInteractor}");
+
+        /*
+        isDirect = GameStateManager.Instance.directInteractor;
+        */
+        isDirect = true;
+
+        SetInput();
     }
 
     private void OnDestroy()
@@ -40,24 +50,26 @@ public class InteractorManager : MonoBehaviour
     void swapInputs(InputAction.CallbackContext ctx)
     {
         //Debug.Log($"Input received");
-        if (isDirect)
+        isDirect = !isDirect;
+        SetInput();
+        
+    }
+
+    void SetInput()
+    {
+        if (!isDirect)
         {
-            leftHandDirect.SetActive(false);            
+            leftHandDirect.SetActive(false);
             rightHandDirect.SetActive(false);
             leftHandRay.SetActive(true);
             rightHandRay.SetActive(true);
-
-            isDirect = false;
         }
         else
         {
             leftHandRay.SetActive(false);
             rightHandRay.SetActive(false);
-            leftHandDirect.SetActive(true);            
+            leftHandDirect.SetActive(true);
             rightHandDirect.SetActive(true);
-
-            isDirect = true;
         }
-        
     }
 }

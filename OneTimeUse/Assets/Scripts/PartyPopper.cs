@@ -20,7 +20,7 @@ public class PartyPopper : MonoBehaviour
     void Start()
     {
         teabagRigidBody = teabag.GetComponent<Rigidbody>();
-        Debug.Log($"Party Popper enabled");
+        //Debug.Log($"Party Popper enabled");
     }
 
     // Update is called once per frame
