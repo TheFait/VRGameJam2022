@@ -184,4 +184,9 @@ public class GameStateManager : MonoBehaviour
     {
         directInteractor = direct;
     }
+
+    public void ClearSave()
+    {
+        gameData.checkpoints.Clear();
+    }
 }

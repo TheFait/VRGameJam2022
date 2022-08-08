@@ -34,10 +34,8 @@ public class InteractorManager : MonoBehaviour
 
         //Debug.Log($"Loading with interactor: {GameStateManager.Instance.directInteractor}");
 
-        /*
+        
         isDirect = GameStateManager.Instance.directInteractor;
-        */
-        isDirect = true;
 
         SetInput();
     }

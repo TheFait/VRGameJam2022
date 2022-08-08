@@ -63,6 +63,6 @@ public class PuzzleManager : MonoBehaviour
         //Debug.Log($"Adding puzzle to list {toCreate.puzzleName}");
         puzzles.Add(toCreate);
 
-        //GameStateManager.Instance.InitializeCheckpoint(toCreate);
+        GameStateManager.Instance.InitializeCheckpoint(toCreate);
     }
 }
